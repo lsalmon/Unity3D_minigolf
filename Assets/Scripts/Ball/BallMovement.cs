@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
+    private Slider m_LoadingSlider;
+    private GameObject m_Canvas;
     private Camera m_Camera;
     private Rigidbody m_Rigidbody;
     private float m_time;
@@ -12,6 +15,10 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         m_Rigidbody = transform.GetComponent<Rigidbody>();
+        m_Canvas = GetComponentInChildren<Canvas>().gameObject;
+        m_Canvas.SetActive(true);
+        m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
+        m_LoadingSlider.value = 0.0f;
     }
 
     public void SetCamera(Camera camera)
@@ -19,10 +26,10 @@ public class BallMovement : MonoBehaviour
         m_Camera = camera;
     }
 
-
     private IEnumerator Firing()
     {
         // TODO: Draw charging animation on ball
+        m_LoadingSlider.value = 0.5f;
         yield return null;
     }
 
@@ -39,6 +46,7 @@ public class BallMovement : MonoBehaviour
         if (Input.GetButtonUp("Fire1")) 
         {
             StopAllCoroutines();
+            m_LoadingSlider.value = 0.0f;
 
             // Get time elapsed between press and release of left mouse click
             float charge = Time.time - m_time;
