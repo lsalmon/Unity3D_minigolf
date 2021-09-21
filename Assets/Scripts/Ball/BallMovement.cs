@@ -9,8 +9,11 @@ public class BallMovement : MonoBehaviour
     private GameObject m_Canvas;
     private Camera m_Camera;
     private Rigidbody m_Rigidbody;
+    public float m_chargeTime = 2.0f;
+    public float m_force = 10.0f;
     private float m_time;
-    private float m_force = 10.0f;
+    private float m_charge;
+    private bool m_released;
 
     void Start()
     {
@@ -18,7 +21,8 @@ public class BallMovement : MonoBehaviour
         m_Canvas = GetComponentInChildren<Canvas>().gameObject;
         m_Canvas.SetActive(true);
         m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
-        m_LoadingSlider.value = 0.1f;
+        m_LoadingSlider.value = 0.0f;
+        m_released = false;
     }
 
     public void SetCamera(Camera camera)
@@ -26,43 +30,38 @@ public class BallMovement : MonoBehaviour
         m_Camera = camera;
     }
 
-    private IEnumerator Firing()
-    {
-        // TODO: Draw charging animation on ball
-        m_LoadingSlider.value = 0.8f;
-        yield return null;
-    }
-
     void Update()
     {
         // Only fire if ball is not moving
         if (m_Rigidbody.IsSleeping())
         {
+            // First mouse click press
             if (Input.GetButtonDown("Fire1")) 
             {
-                StopAllCoroutines();
-                StartCoroutine(Firing());
+                m_charge = 0.0f;
+                m_released = false;
 
                 // Get starting time
                 m_time = Time.time;
             }
-
-            if (Input.GetButtonUp("Fire1")) 
+            // Mouse click still pressed
+            else if (Input.GetButton("Fire1") && !m_released)
             {
-                StopAllCoroutines();
-                m_LoadingSlider.value = 0.1f;
-
                 // Get time elapsed between press and release of left mouse click
-                float charge = Time.time - m_time;
-                if (charge > 1.0f)
-                {
-                    charge = 1.0f;
-                }
+                m_charge = (Time.time - m_time) % m_chargeTime;
+                // Display slider growing in a loop with return to 0
+                // TODO: fix animation and slider size
+                m_LoadingSlider.value = (m_charge / m_chargeTime);
+            }
+            // Mouse click released
+            else if (Input.GetButtonUp("Fire1") && !m_released)
+            {
+                m_released = true;
 
-                // Apply force
+                // Apply force to move ball
                 Vector3 push = m_Camera.transform.forward.normalized;
                 push.y = 0.0f;
-                m_Rigidbody.AddForce (push * charge * m_force, ForceMode.Impulse);
+                m_Rigidbody.AddForce (push * (m_charge / m_chargeTime) * m_force, ForceMode.Impulse);
             }
         }
         else
