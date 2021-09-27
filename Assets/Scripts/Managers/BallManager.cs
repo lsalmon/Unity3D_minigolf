@@ -7,12 +7,13 @@ public class BallManager
 {
     public Transform m_StartingPosition;
     public GameObject m_Hole;
+    public Canvas m_Display;
     private GameObject m_Manager;
     public float m_ChargeTime = 2.0f;
     public float m_Force = 10.0f;
     private BallMovement m_Movement;
 
-    private UISliderControl ui;
+    private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
     public void Setup (Camera camera, GameObject gamemanager)
@@ -28,13 +29,19 @@ public class BallManager
         m_Movement.SetManager(this);
  
         // Set slider
-        ui = m_Instance.GetComponentInChildren<UISliderControl>();
-        ui.SetCamera(camera);
-        ui.SetRigidbody(m_Instance.GetComponent<Rigidbody>());
+        uislider = m_Instance.GetComponentInChildren<UISliderControl>();
+        uislider.SetCamera(camera);
+        uislider.SetRigidbody(m_Instance.GetComponent<Rigidbody>());
+    }
+
+    public void CountStrokes(uint strokes)
+    {
+        m_Display.SendMessage("DisplayStrokes", strokes);
     }
 
     public void End(uint strokes)
     {
+        m_Display.SendMessage("DisplayEnd", strokes);
         Debug.Log("In ballmanager, strokes "+strokes);
         m_Manager.SendMessage("End", strokes);
     }

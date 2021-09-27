@@ -84,14 +84,13 @@ public class BallMovement : MonoBehaviour
 
                 // Increment strokes
                 strokes++;
+                m_Manager.CountStrokes(strokes);
             }
-
         }
         else
         {
             m_LoadingSlider.value = 0.0f;
         }
-
     }
 
     // Check if ball is in hole
