@@ -16,7 +16,7 @@ public class BallManager
     private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
-    public void Setup (Camera camera, GameObject gamemanager)
+    public void Setup (Camera camera, GameObject gamemanager, Collider holecollider)
     {
         // Get ref to GameManager
         m_Manager = gamemanager;
@@ -26,6 +26,7 @@ public class BallManager
         m_Movement.SetCamera(camera);
         m_Movement.SetPower(m_ChargeTime, m_Force);
         m_Movement.SetHole(m_Hole);
+        m_Movement.SetCollider(holecollider);
         m_Movement.SetManager(this);
  
         // Set slider
@@ -37,6 +38,11 @@ public class BallManager
     public void CountStrokes(uint strokes)
     {
         m_Display.SendMessage("DisplayStrokes", strokes);
+    }
+
+    public void OutOfBounds()
+    {
+        m_Display.SendMessage("DisplayOutOfBounds");
     }
 
     public void End(uint strokes)

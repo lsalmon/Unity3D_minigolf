@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
     public GameObject m_BallPrefab;
     public Camera m_Camera;
     public BallManager m_Ball;
+    public Collider m_HoleCollider;
     private CameraControl m_CameraControl;
 
     // Spawn the ball
     void Start()
     {
         m_Ball.m_Instance = Instantiate(m_BallPrefab, m_Ball.m_StartingPosition.position, m_Ball.m_StartingPosition.rotation) as GameObject;
-        m_Ball.Setup(m_Camera, this.gameObject);
+        m_Ball.Setup(m_Camera, this.gameObject, m_HoleCollider);
         m_CameraControl = m_Camera.GetComponent<CameraControl>();
         m_CameraControl.SetPlayer(m_Ball.m_Instance);
     }

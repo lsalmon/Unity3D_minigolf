@@ -9,6 +9,7 @@ public class BallMovement : MonoBehaviour
     private GameObject m_Canvas;
     private Camera m_Camera;
     private GameObject m_Hole;
+    private Collider m_Collider;
     private BallManager m_Manager;
     private Rigidbody m_Rigidbody;
     private float m_ChargeTime = 2.0f;
@@ -17,10 +18,12 @@ public class BallMovement : MonoBehaviour
     private float charge;
     private bool released;
     private uint strokes = 0;
+    private Vector3 previousPosition;
 
     void Start()
     {
         m_Rigidbody = transform.GetComponent<Rigidbody>();
+        previousPosition = transform.position;
         m_Canvas = GetComponentInChildren<Canvas>().gameObject;
         m_Canvas.SetActive(true);
         m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
@@ -44,9 +47,22 @@ public class BallMovement : MonoBehaviour
         m_Hole = hole;
     }
 
+    public void SetCollider(Collider collider)
+    {
+        m_Collider = collider;
+    }
+
     public void SetManager(BallManager manager)
     {
         m_Manager = manager;
+    }
+
+    private void ResetBall()
+    {
+        transform.position = previousPosition;
+        m_Rigidbody.velocity = Vector3.zero;
+        m_Rigidbody.Sleep();
+        m_Manager.OutOfBounds();
     }
 
     void Update()
@@ -62,6 +78,9 @@ public class BallMovement : MonoBehaviour
 
                 // Get starting time
                 time = Time.time;
+
+                // Store position before firing
+                previousPosition = transform.position;
             }
             // Mouse click still pressed
             else if (Input.GetButton("Fire1") && !released)
@@ -90,6 +109,19 @@ public class BallMovement : MonoBehaviour
         else
         {
             m_LoadingSlider.value = 0.0f;
+
+            // Reset ball position and speed if out of bounds
+            if (!m_Collider.bounds.Contains(transform.position))
+            {
+                Ray ray = new Ray(transform.position, Vector3.down);
+                RaycastHit hit;
+
+                // Cast ray right below the ball to check if the ball isnt simply in the air due to a bump
+                if (!m_Collider.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Invoke("ResetBall", 0.5f);
+                }
+            }
         }
     }
 

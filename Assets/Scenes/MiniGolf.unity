@@ -625,6 +625,7 @@ MonoBehaviour:
     m_ChargeTime: 2
     m_Force: 10
     m_Instance: {fileID: 0}
+  m_HoleCollider: {fileID: 597215741}
 --- !u!1001 &1556962582
 PrefabInstance:
   m_ObjectHideFlags: 0
