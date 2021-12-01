@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 8427137714743266930, guid: f423f28ac82109dca8787fcd1ca2641f, type: 3}
   m_Camera: {fileID: 963194227}
-  camOffset: {x: 0.5, y: -0.5, z: 0}
+  camOffset: {x: 0.7, y: -0.7, z: 0}
   camRotation: {x: 60, y: 0, z: 0}
   aimingSpeed: 450
 --- !u!1 &1098696739

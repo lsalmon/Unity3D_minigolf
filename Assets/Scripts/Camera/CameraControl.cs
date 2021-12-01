@@ -11,7 +11,6 @@ public class CameraControl : MonoBehaviour
     public Vector3 camRotation = new Vector3(60.0f, 0.0f, 0.0f);
     public float aimingSpeed = 450f;
     
-    private Transform camPosition;
     private Vector3 offset;
     private float playerAngle;
     private float playerDist;
@@ -20,8 +19,7 @@ public class CameraControl : MonoBehaviour
     void Awake()
     {
         // Set initial camera postion and rotation
-        camPosition = transform;
-        m_Camera = camPosition.GetComponent<Camera>();
+        m_Camera = transform.GetComponent<Camera>();
         
 //        transform.position = transform.position + camOffset;
         transform.eulerAngles = camRotation;
@@ -47,8 +45,6 @@ public class CameraControl : MonoBehaviour
         playerAngle += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * aimingSpeed * Time.deltaTime;
         // Get distance between camera and player in a float
         playerDist = Vector3.Distance(transform.position, transform.position - camOffset);
-        //Debug.Log("PlayerDist " + playerDist);
-
 
         Quaternion rotation = Quaternion.Euler(0, playerAngle, 0);
 
