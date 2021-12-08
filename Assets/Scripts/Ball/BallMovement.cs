@@ -16,7 +16,8 @@ public class BallMovement : MonoBehaviour
     private float m_Force = 10.0f;
     private float time;
     private float charge;
-    private bool released;
+    private bool released = false;
+    private bool reset = false;
     private uint strokes = 0;
     private Vector3 previousPosition;
 
@@ -28,7 +29,6 @@ public class BallMovement : MonoBehaviour
         m_Canvas.SetActive(true);
         m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
         m_LoadingSlider.value = 0.0f;
-        released = false;
     }
 
     public void SetCamera(Camera camera)
@@ -70,6 +70,8 @@ public class BallMovement : MonoBehaviour
         // Only fire if ball is not moving
         if (m_Rigidbody.IsSleeping())
         {
+            reset = false;
+
             // First mouse click press
             if (Input.GetButtonDown("Fire1")) 
             {
@@ -110,8 +112,8 @@ public class BallMovement : MonoBehaviour
         {
             m_LoadingSlider.value = 0.0f;
 
-            // Reset ball position and speed if out of bounds
-            if (!m_Collider.bounds.Contains(transform.position))
+            // Reset ball position and speed if out of bounds and not currently being reset
+            if (!m_Collider.bounds.Contains(transform.position) && !reset)
             {
                 Ray ray = new Ray(transform.position, Vector3.down);
                 RaycastHit hit;
@@ -120,6 +122,7 @@ public class BallMovement : MonoBehaviour
                 if (!m_Collider.Raycast(ray, out hit, Mathf.Infinity))
                 {
                     Invoke("ResetBall", 0.5f);
+                    reset = true;
                 }
             }
         }

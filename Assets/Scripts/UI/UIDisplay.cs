@@ -11,12 +11,13 @@ public class UIDisplay : MonoBehaviour
 
     private void Start()
     {
-        // Get canvas text object
+        // Get canvas text object and align it on the center
         m_Text = GetComponentInChildren<Text>();
+        m_Text.alignment = TextAnchor.MiddleCenter;
 
         // Move text upwards
         RectTransform textTransform = m_Text.GetComponent<RectTransform>();
-        textTransform.anchoredPosition = new Vector2(150f, 40f);
+        textTransform.anchoredPosition = new Vector2(0f, 50f);
 
         // Change font size
         m_Text.fontSize = 35;
@@ -26,7 +27,7 @@ public class UIDisplay : MonoBehaviour
     private IEnumerator PrintStrokes(uint strokes)
     {
         m_Text.text = "+"+strokes;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         m_Text.text = "";
 
         strokeMsg = null;
@@ -41,22 +42,22 @@ public class UIDisplay : MonoBehaviour
 
     private IEnumerator PrintOutOfBounds()
     {
-        // If stroke message is displayed, wait 0.5s before stopping it
+        // If stroke message is displayed, wait 0.3s before stopping it
         if (strokeMsg != null)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
-        // Stop the rest of the coroutines
-        StopAllCoroutines();
+        // Stop stroke message
+        StopCoroutine(strokeMsg);
 
-        // Move text to the left for message then reset it after
+        // Move text higher for message then reset it after
         RectTransform textTransform = m_Text.GetComponent<RectTransform>();
         Vector2 originalPosition = textTransform.anchoredPosition;
-        textTransform.anchoredPosition = new Vector2(100f, 30f);
+        textTransform.anchoredPosition = new Vector2(0f, 75f);
 
         m_Text.text = "Ball out of bounds, resetting position";
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         m_Text.text = "";
 
         textTransform.anchoredPosition = originalPosition;
@@ -73,9 +74,6 @@ public class UIDisplay : MonoBehaviour
         // Stop all the coroutines
         StopAllCoroutines();
 
-        // Move text to the left
-        RectTransform textTransform = m_Text.GetComponent<RectTransform>();
-        textTransform.anchoredPosition = new Vector2(100f, 40f);
         m_Text.text = "Your score: +"+strokes;
     }
 }
