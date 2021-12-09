@@ -46,8 +46,8 @@ public class UISliderControl : MonoBehaviour
 
             // Set position of slider to match the rotation
             // (have slider behind ball at all angles)
-            position.x += dir_canvas.x * 0.4f;
-            position.z += dir_canvas.z * 0.4f;
+            position.x += dir_canvas.x * 0.25f;
+            position.z += dir_canvas.z * 0.25f;
             transform.position = position;
 
             // Set rotation of slider
