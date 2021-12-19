@@ -90,7 +90,6 @@ public class BallMovement : MonoBehaviour
                 // Get time elapsed between press and release of left mouse click
                 charge = (Time.time - time) % m_ChargeTime;
                 // Display slider growing in a loop with return to 0
-                // TODO: fix slider size
                 m_LoadingSlider.value = (charge / m_ChargeTime);
             }
             // Mouse click released

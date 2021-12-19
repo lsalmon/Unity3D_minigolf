@@ -13,11 +13,16 @@ public class BallManager
     public float m_Force = 10.0f;
     private BallMovement m_Movement;
 
+    private UIDisplay uidisplay;
     private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
     public void Setup (Camera camera, GameObject gamemanager, Collider holecollider)
     {
+        // Clean starting screen
+        uidisplay = m_Display.GetComponent<UIDisplay>();
+        uidisplay.CleanDisplay();
+
         // Get ref to GameManager
         m_Manager = gamemanager;
 
@@ -37,17 +42,17 @@ public class BallManager
 
     public void CountStrokes(uint strokes)
     {
-        m_Display.SendMessage("DisplayStrokes", strokes);
+        uidisplay.DisplayStrokes(strokes);
     }
 
     public void OutOfBounds()
     {
-        m_Display.SendMessage("DisplayOutOfBounds");
+        uidisplay.DisplayOutOfBounds();
     }
 
     public void End(uint strokes)
     {
-        m_Display.SendMessage("DisplayEnd", strokes);
+        uidisplay.DisplayEnd(strokes);
         Debug.Log("In ballmanager, strokes "+strokes);
         m_Manager.SendMessage("End", strokes);
     }

@@ -20,8 +20,11 @@ public class UIDisplay : MonoBehaviour
         textTransform.anchoredPosition = new Vector2(0f, 50f);
 
         // Change font size
-        m_Text.fontSize = 35;
-        textTransform.sizeDelta = new Vector2(m_Text.fontSize * 10, 100f);
+        m_Text.fontSize = 50;
+        textTransform.sizeDelta = new Vector2(m_Text.fontSize * 15, 100f);
+
+        // Display starting text
+        m_Text.text = "Press any key to start";
     }
 
     private IEnumerator PrintStrokes(uint strokes)
@@ -75,5 +78,16 @@ public class UIDisplay : MonoBehaviour
         StopAllCoroutines();
 
         m_Text.text = "Your score: +"+strokes;
+    }
+
+    public void CleanDisplay()
+    {
+        // Reset font size
+        m_Text.fontSize = 35;
+        RectTransform textTransform = m_Text.GetComponent<RectTransform>();
+        textTransform.sizeDelta = new Vector2(m_Text.fontSize * 10, 100f);
+
+        // Reset text
+        m_Text.text = "";
     }
 }
