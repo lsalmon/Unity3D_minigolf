@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class SoundCollision : MonoBehaviour
+public class PlaySounds : MonoBehaviour
 {
     public AudioClip collision;
+    public AudioClip completed;
 
     void Start()
     {
@@ -18,6 +19,12 @@ public class SoundCollision : MonoBehaviour
     // or when it flies and falls back on the ground
     void OnCollisionEnter()
     {
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void Completed()
+    {
+        GetComponent<AudioSource>().clip = completed;
         GetComponent<AudioSource>().Play();
     }
 }

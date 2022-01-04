@@ -12,6 +12,7 @@ public class BallMovement : MonoBehaviour
     private Collider m_Collider;
     private BallManager m_Manager;
     private Rigidbody m_Rigidbody;
+    private PlaySounds m_Audiomixer;
     private float m_ChargeTime = 2.0f;
     private float m_Force = 10.0f;
     private float time;
@@ -29,6 +30,7 @@ public class BallMovement : MonoBehaviour
         m_Canvas.SetActive(true);
         m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
         m_LoadingSlider.value = 0.0f;
+        m_Audiomixer = transform.GetComponent<PlaySounds>();
     }
 
     public void SetCamera(Camera camera)
@@ -132,6 +134,9 @@ public class BallMovement : MonoBehaviour
     {  
         if (GameObject.ReferenceEquals(trigger.gameObject, m_Hole))
         {
+            // Play ending sound
+            m_Audiomixer.Completed();
+
             // Send message to BallManager to display score and end the game
             m_Manager.End(strokes);
         }

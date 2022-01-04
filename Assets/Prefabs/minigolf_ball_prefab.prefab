@@ -641,7 +641,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8427137714743266930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5acb1a097510fe3fa6a23feb5f84368, type: 3}
+  m_Script: {fileID: 11500000, guid: 8db685e1534d2553f887b459af9d2c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collision: {fileID: 8300000, guid: 0b3577914d28436ec826890ec7aecf19, type: 3}
+  completed: {fileID: 8300000, guid: 9c66793cd7b14831cb7be06930dbef8a, type: 3}

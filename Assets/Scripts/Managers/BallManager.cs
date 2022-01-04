@@ -54,6 +54,10 @@ public class BallManager
     {
         uidisplay.DisplayEnd(strokes);
         Debug.Log("In ballmanager, strokes "+strokes);
+
+        // Disable control on ball
+        m_Movement.enabled = false;
+
         m_Manager.SendMessage("End", strokes);
     }
 }
