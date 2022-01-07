@@ -8,9 +8,13 @@ public class UIDisplay : MonoBehaviour
     private Text m_Text;
     private Coroutine boundsErr;
     private Coroutine strokeMsg;
+    public GameObject pauseMenu;
 
     private void Start()
     {
+        // Disable the pause menu 
+        pauseMenu.SetActive(false);
+
         // Get canvas text object and align it on the center
         m_Text = GetComponentInChildren<Text>();
         m_Text.alignment = TextAnchor.MiddleCenter;
@@ -27,6 +31,7 @@ public class UIDisplay : MonoBehaviour
         m_Text.text = "Press any key to start";
     }
 
+    // Text display functions
     private IEnumerator PrintStrokes(uint strokes)
     {
         m_Text.text = "+"+strokes;
@@ -89,5 +94,16 @@ public class UIDisplay : MonoBehaviour
 
         // Reset text
         m_Text.text = "";
+    }
+
+    // Menu functions
+    public void DisplayPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
     }
 }
