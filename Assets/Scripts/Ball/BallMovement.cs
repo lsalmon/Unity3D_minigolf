@@ -20,7 +20,6 @@ public class BallMovement : MonoBehaviour
     private bool released = false;
     private bool reset = false;
     private uint strokes = 0;
-    private uint paused = 0;
     private Vector3 previousPosition;
 
     void Start()
@@ -70,13 +69,6 @@ public class BallMovement : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.GetButtonDown("Submit")) 
-        {
-            paused = 1 - paused;
-            Time.timeScale = paused;
-        }
-
         // Only fire if ball is not moving
         if (m_Rigidbody.IsSleeping())
         {

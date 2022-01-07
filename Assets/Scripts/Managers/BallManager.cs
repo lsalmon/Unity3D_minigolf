@@ -7,22 +7,16 @@ public class BallManager
 {
     public Transform m_StartingPosition;
     public GameObject m_Hole;
-    public Canvas m_Display;
-    private GameObject m_Manager;
+    private GameManager m_Manager;
     public float m_ChargeTime = 2.0f;
     public float m_Force = 10.0f;
     private BallMovement m_Movement;
 
-    private UIDisplay uidisplay;
     private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
-    public void Setup (Camera camera, GameObject gamemanager, Collider holecollider)
+    public void Setup (Camera camera, GameManager gamemanager, Collider holecollider)
     {
-        // Clean starting screen
-        uidisplay = m_Display.GetComponent<UIDisplay>();
-        uidisplay.CleanDisplay();
-
         // Get ref to GameManager
         m_Manager = gamemanager;
 
@@ -42,22 +36,21 @@ public class BallManager
 
     public void CountStrokes(uint strokes)
     {
-        uidisplay.DisplayStrokes(strokes);
+        m_Manager.CountStrokes(strokes);
     }
 
     public void OutOfBounds()
     {
-        uidisplay.DisplayOutOfBounds();
+        m_Manager.OutOfBounds();
     }
 
     public void End(uint strokes)
     {
-        uidisplay.DisplayEnd(strokes);
         Debug.Log("In ballmanager, strokes "+strokes);
 
         // Disable control on ball
         m_Movement.enabled = false;
 
-        m_Manager.SendMessage("End", strokes);
+        m_Manager.End(strokes);
     }
 }
