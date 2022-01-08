@@ -9,6 +9,7 @@ public class UIDisplay : MonoBehaviour
     private Coroutine boundsErr;
     private Coroutine strokeMsg;
     public GameObject pauseMenu;
+    public GameManager gameManager;
 
     private void Start()
     {
@@ -102,8 +103,18 @@ public class UIDisplay : MonoBehaviour
         pauseMenu.SetActive(true);
     }
 
+    // Resume function called when pressing pause key
     public void Resume()
     {
         pauseMenu.SetActive(false);
+    }
+
+    // Resume function called when clicking on the Resume button
+    public void ResumeFromMenu()
+    {
+        pauseMenu.SetActive(false);
+
+        // Tell the manager to resume game
+        gameManager.ResumeFromMenu();
     }
 }

@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviour
     public Collider m_HoleCollider;
     public Canvas m_Display;
     public Vector3 m_CamOffset   = new Vector3(5f, 3f, 0.0f);
+    public AudioClip background;
+    public AudioClip completed;
     private bool started = false;
-    private uint running = 0;
+    private uint running = 1;
     private CameraControl m_CameraControl;
     private UIDisplay uidisplay;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -25,6 +28,9 @@ public class GameManager : MonoBehaviour
 
         // Get UI component to display text on screen
         uidisplay = m_Display.GetComponent<UIDisplay>();
+
+        // Get audio source for background music and winning sound
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Display starting screen with rotating camera
@@ -53,11 +59,15 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = running;
                 if (running == 0)
                 {
+                    // Pause background music
+                    audioSource.Pause();
                     uidisplay.DisplayPauseMenu();
                 }
                 else
                 {
                     uidisplay.Resume();
+                    // Resume background music
+                    audioSource.Play();
                 }
             }
         }
@@ -66,6 +76,11 @@ public class GameManager : MonoBehaviour
     // Spawn the ball
     void SpawnBall()
     {
+        // Start background music in a loop
+        audioSource.loop = true;
+        audioSource.clip = background;
+        audioSource.Play();
+
         // Clean starting screen
         uidisplay.CleanDisplay();
 
@@ -90,7 +105,23 @@ public class GameManager : MonoBehaviour
     // Stop the game if ball is in hole
     public void End(uint strokes)
     {
+        // Play ending sound once
+        audioSource.loop = false;
+        audioSource.clip = completed;
+        audioSource.Play();
+
+        // Display ending message
         uidisplay.DisplayEnd(strokes);
         Debug.Log("End of game, strokes "+strokes);
+    }
+
+    // If we resume from the menu instead of pressing the menu key
+    public void ResumeFromMenu()
+    {
+        running = 1;
+        Time.timeScale = running;
+
+        // Resume background music
+        audioSource.Play();
     }
 }
