@@ -124,4 +124,10 @@ public class GameManager : MonoBehaviour
         // Resume background music
         audioSource.Play();
     }
+
+    // If background music volume has been changed from menu
+    public void MusicVolumeUpdate(float volume)
+    {
+        audioSource.volume = volume;
+    }
 }
