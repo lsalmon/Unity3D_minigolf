@@ -44,12 +44,17 @@ public class BallManager
         m_Manager.OutOfBounds();
     }
 
+    public void EnableBall(bool status)
+    {
+        m_Movement.EnableMovement(status);
+    }
+
     public void End(uint strokes)
     {
         Debug.Log("In ballmanager, strokes "+strokes);
 
         // Disable control on ball
-        m_Movement.enabled = false;
+        EnableBall(false);
 
         m_Manager.End(strokes);
     }

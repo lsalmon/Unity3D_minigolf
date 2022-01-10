@@ -61,11 +61,15 @@ public class GameManager : MonoBehaviour
                 {
                     // Pause background music
                     audioSource.Pause();
+                    // Disable control on the ball
+                    m_Ball.EnableBall(false);
                     uidisplay.DisplayPauseMenu();
                 }
                 else
                 {
                     uidisplay.Resume();
+                    // Reenable control on the ball
+                    m_Ball.EnableBall(true);
                     // Resume background music
                     audioSource.Play();
                 }
@@ -120,6 +124,9 @@ public class GameManager : MonoBehaviour
     {
         running = 1;
         Time.timeScale = running;
+
+        // Reenable control on the ball
+        m_Ball.EnableBall(true);
 
         // Resume background music
         audioSource.Play();

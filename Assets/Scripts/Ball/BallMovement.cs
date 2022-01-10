@@ -20,6 +20,7 @@ public class BallMovement : MonoBehaviour
     private bool reset = false;
     private uint strokes = 0;
     private Vector3 previousPosition;
+    private bool move = true;
 
     void Start()
     {
@@ -57,6 +58,11 @@ public class BallMovement : MonoBehaviour
         m_Manager = manager;
     }
 
+    public void EnableMovement(bool enabled)
+    {
+        move = enabled;
+    }
+
     private void ResetBall()
     {
         transform.position = previousPosition;
@@ -68,7 +74,8 @@ public class BallMovement : MonoBehaviour
     void Update()
     {
         // Only fire if ball is not moving
-        if (m_Rigidbody.IsSleeping())
+        // and is allowed to move (not in pause menu)
+        if (move && m_Rigidbody.IsSleeping())
         {
             reset = false;
 
