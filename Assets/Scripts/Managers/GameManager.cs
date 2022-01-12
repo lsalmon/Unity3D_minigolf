@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
         // Play ending sound once
         audioSource.loop = false;
+        audioSource.volume = 1.0f;
         audioSource.clip = completed;
         audioSource.Play();
 
