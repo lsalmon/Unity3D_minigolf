@@ -15,7 +15,7 @@ public class BallManager
     private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
-    public void Setup (Camera camera, GameManager gamemanager, Collider holecollider)
+    public void Setup (Camera camera, GameManager gamemanager, Collider[] holecollider)
     {
         // Get ref to GameManager
         m_Manager = gamemanager;

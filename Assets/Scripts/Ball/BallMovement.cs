@@ -9,7 +9,7 @@ public class BallMovement : MonoBehaviour
     private GameObject m_Canvas;
     private Camera m_Camera;
     private GameObject m_Hole;
-    private Collider m_Collider;
+    private Collider[] m_Collider;
     private BallManager m_Manager;
     private Rigidbody m_Rigidbody;
     private float m_ChargeTime = 2.0f;
@@ -48,7 +48,7 @@ public class BallMovement : MonoBehaviour
         m_Hole = hole;
     }
 
-    public void SetCollider(Collider collider)
+    public void SetCollider(Collider[] collider)
     {
         m_Collider = collider;
     }
@@ -119,16 +119,31 @@ public class BallMovement : MonoBehaviour
             m_LoadingSlider.value = 0.0f;
 
             // Reset ball position and speed if out of bounds and not currently being reset
-            if (!m_Collider.bounds.Contains(transform.position) && !reset)
+            if (!reset)
             {
-                Ray ray = new Ray(transform.position, Vector3.down);
-                RaycastHit hit;
-
-                // Cast ray right below the ball to check if the ball isnt simply in the air due to a bump
-                if (!m_Collider.Raycast(ray, out hit, Mathf.Infinity))
+                // Check if ground collider contains ball
+                if (!m_Collider[0].bounds.Contains(transform.position))
                 {
-                    Invoke("ResetBall", 0.5f);
+                    Ray ray = new Ray(transform.position, Vector3.down);
+                    RaycastHit hit;
                     reset = true;
+
+                    foreach (Collider collider in m_Collider)
+                    {
+                        // For all colliders (ground + top + sides),
+                        // cast ray right below the ball to check if the ball isnt simply in the air due to a bump
+                        // If at least a collider is below the ball, abort reset
+                        if (collider.Raycast(ray, out hit, Mathf.Infinity))
+                        {
+                            reset = false;
+                            break;
+                        }
+                    }
+
+                    if (reset)
+                    {
+                        Invoke("ResetBall", 0.5f);
+                    }
                 }
             }
         }

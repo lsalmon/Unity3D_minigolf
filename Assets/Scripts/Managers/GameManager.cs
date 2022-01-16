@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject m_BallPrefab;
     public Camera m_Camera;
     public BallManager m_Ball;
-    public Collider m_HoleCollider;
+    // Ground collider must be first in array
+    public Collider[] m_HoleCollider;
     public Canvas m_Display;
     public Vector3 m_CamOffset   = new Vector3(5f, 3f, 0.0f);
     public AudioClip background;
