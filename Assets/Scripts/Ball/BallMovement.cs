@@ -12,6 +12,7 @@ public class BallMovement : MonoBehaviour
     private Collider[] m_Collider;
     private BallManager m_Manager;
     private Rigidbody m_Rigidbody;
+    private PlaySounds m_PlaySounds;
     private float m_ChargeTime = 2.0f;
     private float m_Force = 10.0f;
     private float time;
@@ -30,6 +31,7 @@ public class BallMovement : MonoBehaviour
         m_Canvas.SetActive(true);
         m_LoadingSlider = m_Canvas.GetComponentInChildren<Slider>();
         m_LoadingSlider.value = 0.0f;
+        m_PlaySounds = transform.GetComponent<PlaySounds>();
     }
 
     public void SetCamera(Camera camera)
@@ -90,12 +92,16 @@ public class BallMovement : MonoBehaviour
 
                 // Store position before firing
                 previousPosition = transform.position;
+
+                // Start playing loading sound
+                m_PlaySounds.StartLoading();
             }
             // Mouse click still pressed
             else if (Input.GetButton("Fire1") && !released)
             {
                 // Get time elapsed between press and release of left mouse click
                 charge = (Time.time - time) % m_ChargeTime;
+
                 // Display slider growing in a loop with return to 0
                 m_LoadingSlider.value = (charge / m_ChargeTime);
             }
@@ -112,6 +118,9 @@ public class BallMovement : MonoBehaviour
                 // Increment strokes
                 strokes++;
                 m_Manager.CountStrokes(strokes);
+
+                // Stop playing loading sound
+                m_PlaySounds.EndLoading();
             }
         }
         else

@@ -5,3 +5,4 @@ Yet another Unity minigolf game
 - collision_simple.ogg -> "Collision Nutfall (Yo Frankie!)" from the Blender Foundation on opengameart.org
 - finished.mp3 -> "Completion sound." from Brandon Morris on opengameart.org
 - background_music.mp3 -> "ambient trap song (instrumental)" from Oddroom on opengameart.org
+- loading_slider_wave.ogg -> "Beach Ocean Waves" from jasinski on opengameart.org

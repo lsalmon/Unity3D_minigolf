@@ -644,3 +644,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db685e1534d2553f887b459af9d2c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loading_slider_wave: {fileID: 8300000, guid: 405b036bc83cb92e289bb3cd1cfe650a, type: 3}
+  m_AudioMixer: {fileID: -6199122872220393267, guid: f37634edb435b4d449028e0b2df613c1, type: 2}
