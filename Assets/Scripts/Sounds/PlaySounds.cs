@@ -6,14 +6,18 @@ public class PlaySounds : MonoBehaviour
 {
     private AudioSource collisionSource;
     private AudioSource loadingSource;
-    public AudioClip loading_slider_wave;
+    public AudioClip m_Collision;
+    public AudioClip m_Loading_Slider;
     public AudioMixerGroup m_AudioMixer;
 
     void Start()
     {
-        collisionSource = GetComponent<AudioSource>();
+        collisionSource = gameObject.AddComponent<AudioSource>();
+        collisionSource.clip = m_Collision;
+        collisionSource.volume = 1.0f;
+        collisionSource.outputAudioMixerGroup = m_AudioMixer;
         loadingSource = gameObject.AddComponent<AudioSource>();
-        loadingSource.clip = loading_slider_wave; 
+        loadingSource.clip = m_Loading_Slider; 
         loadingSource.loop = true;
         loadingSource.volume = 0.1f;
         loadingSource.outputAudioMixerGroup = m_AudioMixer; 
