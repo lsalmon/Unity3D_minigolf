@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Camera m_Camera;
     public BallManager m_Ball;
     // Ground collider must be first in array
-    public Collider[] m_HoleCollider;
+    public Collider[] m_OutOfBoundsColliders;
     public Canvas m_Display;
     public Vector3 m_CamOffset   = new Vector3(5f, 3f, 0.0f);
     public AudioClip background;
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         m_CameraControl.enabled = true;
 
         m_Ball.m_Instance = Instantiate(m_BallPrefab, m_Ball.m_StartingPosition.position, m_Ball.m_StartingPosition.rotation) as GameObject;
-        m_Ball.Setup(m_Camera, this, m_HoleCollider);
+        m_Ball.Setup(m_Camera, this, m_OutOfBoundsColliders);
         m_CameraControl.SetPlayer(m_Ball.m_Instance);
     }
 

@@ -15,7 +15,7 @@ public class BallManager
     private UISliderControl uislider;
     [HideInInspector] public GameObject m_Instance;
 
-    public void Setup (Camera camera, GameManager gamemanager, Collider[] holecollider)
+    public void Setup (Camera camera, GameManager gamemanager, Collider[] oobcolliders)
     {
         // Get ref to GameManager
         m_Manager = gamemanager;
@@ -25,7 +25,7 @@ public class BallManager
         m_Movement.SetCamera(camera);
         m_Movement.SetPower(m_ChargeTime, m_Force);
         m_Movement.SetHole(m_Hole);
-        m_Movement.SetCollider(holecollider);
+        m_Movement.SetColliders(oobcolliders);
         m_Movement.SetManager(this);
  
         // Set slider
