@@ -8,19 +8,20 @@ public class PlaySounds : MonoBehaviour
     private AudioSource loadingSource;
     public AudioClip m_Collision;
     public AudioClip m_Loading_Slider;
-    public AudioMixerGroup m_AudioMixer;
+    public AudioMixerGroup m_AudioMixerCollisions;
+    public AudioMixerGroup m_AudioMixerLoading;
 
     void Start()
     {
         collisionSource = gameObject.AddComponent<AudioSource>();
         collisionSource.clip = m_Collision;
         collisionSource.volume = 1.0f;
-        collisionSource.outputAudioMixerGroup = m_AudioMixer;
+        collisionSource.outputAudioMixerGroup = m_AudioMixerCollisions;
         loadingSource = gameObject.AddComponent<AudioSource>();
         loadingSource.clip = m_Loading_Slider; 
         loadingSource.loop = true;
-        loadingSource.volume = 0.1f;
-        loadingSource.outputAudioMixerGroup = m_AudioMixer; 
+        loadingSource.volume = 1.0f;
+        loadingSource.outputAudioMixerGroup = m_AudioMixerLoading;
     }
 
     // Play collision sound every time we hit a collider (meshes for the ground, sides, etc)
