@@ -548,6 +548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Collision: {fileID: 8300000, guid: 0b3577914d28436ec826890ec7aecf19, type: 3}
-  m_Loading_Slider: {fileID: 8300000, guid: 405b036bc83cb92e289bb3cd1cfe650a, type: 3}
+  m_Loading_Slider: {fileID: 8300000, guid: 54141e0262e651565b98d89a1be342a3, type: 3}
   m_AudioMixerCollisions: {fileID: -6199122872220393267, guid: f37634edb435b4d449028e0b2df613c1, type: 2}
   m_AudioMixerLoading: {fileID: -2200811487791006328, guid: f37634edb435b4d449028e0b2df613c1, type: 2}

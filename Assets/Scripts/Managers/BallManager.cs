@@ -8,6 +8,7 @@ public class BallManager
     public Transform m_StartingPosition;
     public GameObject m_Hole;
     private GameManager m_Manager;
+    // Max 2s
     public float m_ChargeTime = 2.0f;
     public float m_Force = 10.0f;
     private BallMovement m_Movement;
