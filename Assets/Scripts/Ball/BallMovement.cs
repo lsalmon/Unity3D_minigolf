@@ -101,9 +101,13 @@ public class BallMovement : MonoBehaviour
             {
                 // Get time elapsed between press and release of left mouse click
                 charge = (Time.time - time) % m_ChargeTime;
+                float loadingValue = (charge / m_ChargeTime);
 
                 // Display slider growing in a loop with return to 0
-                m_LoadingSlider.value = (charge / m_ChargeTime);
+                m_LoadingSlider.value = loadingValue;
+
+                // Change pitch of loading sound along with display slider
+                m_PlaySounds.SetPitch(loadingValue);
             }
             // Mouse click released
             else if (Input.GetButtonUp("Fire1") && !released)

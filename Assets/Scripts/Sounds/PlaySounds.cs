@@ -4,12 +4,12 @@ using System.Collections;
 
 public class PlaySounds : MonoBehaviour
 {
-    private AudioSource collisionSource;
-    private AudioSource loadingSource;
     public AudioClip m_Collision;
     public AudioClip m_Loading_Slider;
     public AudioMixerGroup m_AudioMixerCollisions;
     public AudioMixerGroup m_AudioMixerLoading;
+    private AudioSource collisionSource;
+    private AudioSource loadingSource;
 
     void Start()
     {
@@ -35,7 +35,15 @@ public class PlaySounds : MonoBehaviour
     // Playing loading sound for the slider when player clicks
     public void StartLoading()
     {
+        loadingSource.pitch = 1.0f;
         loadingSource.Play();
+    }
+
+    // Set pitch during loading
+    public void SetPitch(float pitch)
+    {
+        // Pitch starts at 0.5f and ends at 1.5f
+        loadingSource.pitch = 0.5f + pitch;
     }
 
     // End loading sound once player releases mouse

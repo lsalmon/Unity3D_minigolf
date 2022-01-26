@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class UIDisplay : MonoBehaviour
 {
     // Display text on screen
+    public GameObject pauseMenu;
+    public GameManager gameManager;
     private Text m_Text;
     private Coroutine boundsErr;
     private Coroutine strokeMsg;
-    public GameObject pauseMenu;
-    public GameManager gameManager;
 
     private void Start()
     {
