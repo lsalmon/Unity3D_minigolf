@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public GameObject player;
+    public List<GameObject> env;
 
     public Camera m_Camera;
     public Vector3 m_CamOffset   = new Vector3(0.5f, -0.5f, 0.0f);
@@ -14,6 +15,7 @@ public class CameraControl : MonoBehaviour
     private Vector3 offset;
     private float playerAngle;
     private float playerDist;
+    private Canvas slider;
 
     // Awake runs before Start
     void Awake()
@@ -29,6 +31,7 @@ public class CameraControl : MonoBehaviour
     public void SetPlayer(GameObject ball)
     {
         player = ball;
+        slider = player.GetComponentInChildren<Canvas>();
     }
 
     void Start()
@@ -36,7 +39,30 @@ public class CameraControl : MonoBehaviour
         // Get distance between player and camera
 //        offset = player.transform.position - transform.position;
     }
-    
+
+    void Update ()
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Linecast(transform.position, slider.transform.position, out hitInfo))
+        {
+            if (hitInfo.collider.name != "Ground")
+            {
+                foreach (var obj in env)
+                {
+                    if (obj.name == hitInfo.collider.name || (obj.name == "Sides" && hitInfo.collider.name == "Top"))
+                    {
+                        obj.GetComponent<SetOpacity>().ChangeOpacity(true);
+                    }
+                    else
+                    {
+                        obj.GetComponent<SetOpacity>().ChangeOpacity(false);
+                    }
+                }
+            }
+        }
+    }
+
     // LateUpdate is called after all Update methods
     // This way the camera can follow objects which have moved during Update
     void LateUpdate ()

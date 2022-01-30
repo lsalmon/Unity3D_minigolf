@@ -3,7 +3,22 @@ guid: 02226bba50d4e49cb93634fba07ebed3
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borders
+    second: {fileID: 2100000, guid: f86209490e3240aac83e9bd798ff4be8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flag
+    second: {fileID: 2100000, guid: 1a91c0a088c7f6f15bcbf47c6f9706bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 62913133a40f167f2af25b0b87c986ad, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
