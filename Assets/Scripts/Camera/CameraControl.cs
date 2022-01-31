@@ -15,7 +15,6 @@ public class CameraControl : MonoBehaviour
     private Vector3 offset;
     private float playerAngle;
     private float playerDist;
-    private Canvas slider;
 
     // Awake runs before Start
     void Awake()
@@ -31,7 +30,6 @@ public class CameraControl : MonoBehaviour
     public void SetPlayer(GameObject ball)
     {
         player = ball;
-        slider = player.GetComponentInChildren<Canvas>();
     }
 
     void Start()
@@ -40,11 +38,12 @@ public class CameraControl : MonoBehaviour
 //        offset = player.transform.position - transform.position;
     }
 
-    void Update ()
+    void FixedUpdate ()
     {
         RaycastHit hitInfo;
 
-        if (Physics.Linecast(transform.position, slider.transform.position, out hitInfo))
+        // See if there is an object between camera and ball and if so, make it transparent
+        if (Physics.Linecast(transform.position, player.transform.position, out hitInfo))
         {
             if (hitInfo.collider.name != "Ground")
             {
