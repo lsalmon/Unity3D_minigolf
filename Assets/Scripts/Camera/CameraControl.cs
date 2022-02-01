@@ -22,7 +22,6 @@ public class CameraControl : MonoBehaviour
         // Set initial camera postion and rotation
         m_Camera = transform.GetComponent<Camera>();
         
-//        transform.position = transform.position + m_CamOffset;
         transform.eulerAngles = m_CamRotation;
         playerAngle = transform.eulerAngles.y;
     }
@@ -30,12 +29,6 @@ public class CameraControl : MonoBehaviour
     public void SetPlayer(GameObject ball)
     {
         player = ball;
-    }
-
-    void Start()
-    {
-        // Get distance between player and camera
-//        offset = player.transform.position - transform.position;
     }
 
     void FixedUpdate ()
@@ -68,6 +61,7 @@ public class CameraControl : MonoBehaviour
     {
         // Get player input 
         playerAngle += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * aimingSpeed * Time.deltaTime;
+
         // Get distance between camera and player in a float
         playerDist = Vector3.Distance(transform.position, transform.position - m_CamOffset);
 
@@ -75,7 +69,6 @@ public class CameraControl : MonoBehaviour
 
         // Move camera
         transform.position = player.transform.position - (rotation * m_CamOffset);
-//        transform.position = transform.position + m_CamOffset;
 
         // Point camera at player
         transform.LookAt(player.transform);
