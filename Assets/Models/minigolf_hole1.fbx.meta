@@ -8,17 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Borders
-    second: {fileID: 2100000, guid: f86209490e3240aac83e9bd798ff4be8, type: 2}
+    second: {fileID: 2100000, guid: b8de10fd9c6bf67019c5246c6443684f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Flag
-    second: {fileID: 2100000, guid: 1a91c0a088c7f6f15bcbf47c6f9706bb, type: 2}
+    second: {fileID: 2100000, guid: 8e2fb342851d89e5e8aa8ea819b990f4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grass
-    second: {fileID: 2100000, guid: 62913133a40f167f2af25b0b87c986ad, type: 2}
+    second: {fileID: 2100000, guid: 0992dd23701475e8c9486ccb17d3f47f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 1788269377728665300, guid: 02226bba50d4e49cb93634fba07ebed3, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

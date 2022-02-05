@@ -3,7 +3,12 @@ guid: 1a2232f5123bcf4de9bb9e27a14a2de5
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Golf texture
+    second: {fileID: 2100000, guid: a2c8e54b8e994dc26aaf7a3e0d02170e, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
