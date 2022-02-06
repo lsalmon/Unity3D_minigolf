@@ -14,8 +14,11 @@ public class GameManager : MonoBehaviour
     public Vector3 m_CamOffset   = new Vector3(5f, 3f, 0.0f);
     public AudioClip background;
     public AudioClip completed;
+    // Starting menu and "any key" screen control
+    public bool starting = false;
     private bool started = false;
-    private uint running = 1;
+    // Pause menu control
+    private uint unpaused = 1;
     private CameraControl m_CameraControl;
     private UIDisplay uidisplay;
     private AudioSource audioSource;
@@ -32,11 +35,14 @@ public class GameManager : MonoBehaviour
 
         // Get audio source for background music and winning sound
         audioSource = GetComponent<AudioSource>();
+
+        Time.timeScale = 1;
     }
 
     // Display starting screen with rotating camera
     void Update()
     {
+        // If user hasnt pressed on any key, show golf hole
         if (!started)
         {
             if (Input.anyKey)
@@ -56,9 +62,9 @@ public class GameManager : MonoBehaviour
             // Pause menu
             if (Input.GetButtonDown("Submit"))
             {
-                running = 1 - running;
-                Time.timeScale = running;
-                if (running == 0)
+                unpaused = 1 - unpaused;
+                Time.timeScale = unpaused;
+                if (unpaused == 0)
                 {
                     // Pause background music
                     audioSource.Pause();
@@ -97,6 +103,11 @@ public class GameManager : MonoBehaviour
         m_CameraControl.SetPlayer(m_Ball.m_Instance);
     }
 
+    public void StartGame()
+    {
+        starting = true;
+    }
+
     public void CountStrokes(uint strokes)
     {
         uidisplay.DisplayStrokes(strokes);
@@ -124,8 +135,8 @@ public class GameManager : MonoBehaviour
     // If we resume from the menu instead of pressing the menu key
     public void ResumeFromMenu()
     {
-        running = 1;
-        Time.timeScale = running;
+        unpaused = 1;
+        Time.timeScale = unpaused;
 
         // Reenable control on the ball
         m_Ball.EnableBall(true);

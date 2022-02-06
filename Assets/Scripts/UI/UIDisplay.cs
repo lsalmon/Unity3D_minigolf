@@ -5,17 +5,39 @@ using UnityEngine.UI;
 public class UIDisplay : MonoBehaviour
 {
     // Display text on screen
-    public GameObject pauseMenu;
     public GameManager gameManager;
+    public GameObject mainMenu;
+    public GameObject pauseMenu;
     private Text m_Text;
     private Coroutine boundsErr;
     private Coroutine strokeMsg;
 
     private void Start()
     {
+        // Find and assign menu objects,
+        // which are children of the gameobject the script is attached to
+        mainMenu = transform.Find("MainMenu").gameObject;
+
+        if (mainMenu == null)
+        {
+            Debug.Log("Could not retrieve main menu object");
+        }
+
+        pauseMenu = transform.Find("OptionMenu").gameObject;
+
+        if (pauseMenu == null)
+        {
+            Debug.Log("Could not retrieve pause menu object");
+        }
+
         // Disable the pause menu 
         pauseMenu.SetActive(false);
 
+        // Enable the main menu
+        mainMenu.SetActive(true);
+
+        // Init of information display canvas
+        // (directly linked to the gameobject the script is attached to)
         // Get canvas text object and align it on the center
         m_Text = GetComponentInChildren<Text>();
         m_Text.alignment = TextAnchor.MiddleCenter;
@@ -27,9 +49,9 @@ public class UIDisplay : MonoBehaviour
         // Change font size
         m_Text.fontSize = 50;
         textTransform.sizeDelta = new Vector2(m_Text.fontSize * 15, 100f);
-
-        // Display starting text
-        m_Text.text = "Press any key to start";
+ 
+        // TODO: Find out why the main menu is not clickable at init
+        StartGame();
     }
 
     // Text display functions
@@ -40,6 +62,18 @@ public class UIDisplay : MonoBehaviour
         m_Text.text = "";
 
         strokeMsg = null;
+    }
+
+    public void StartGame()
+    {
+        // Disable the main menu
+        mainMenu.SetActive(false);
+
+        // Display starting text (information display canvas)
+        m_Text.text = "Press any key to start";
+
+        // Tell the manager to start the game
+        gameManager.StartGame();
     }
 
     public void DisplayStrokes(uint strokes)
