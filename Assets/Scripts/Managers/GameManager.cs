@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
     public Vector3 m_CamOffset   = new Vector3(5f, 3f, 0.0f);
     public AudioClip background;
     public AudioClip completed;
-    // Starting menu and "any key" screen control
-    public bool starting = false;
+    // "any key" screen control
     private bool started = false;
     // Pause menu control
     private uint unpaused = 1;
@@ -27,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         m_Camera.transform.position = m_CamOffset;
         m_CameraControl = m_Camera.GetComponent<CameraControl>();
-        // Disable camera control to not interfere with the starting screen
+        // Disable camera control to not interfere with the "any key" screen
         m_CameraControl.enabled = false;
 
         // Get UI component to display text on screen
@@ -35,11 +34,9 @@ public class GameManager : MonoBehaviour
 
         // Get audio source for background music and winning sound
         audioSource = GetComponent<AudioSource>();
-
-        Time.timeScale = 1;
     }
 
-    // Display starting screen with rotating camera
+    // Display "any key" screen with rotating camera
     void Update()
     {
         // If user hasnt pressed on any key, show golf hole
@@ -92,7 +89,7 @@ public class GameManager : MonoBehaviour
         audioSource.clip = background;
         audioSource.Play();
 
-        // Clean starting screen
+        // Clean "any key" screen
         uidisplay.CleanDisplay();
 
         // Enable camera control for the ball
@@ -101,11 +98,6 @@ public class GameManager : MonoBehaviour
         m_Ball.m_Instance = Instantiate(m_BallPrefab, m_Ball.m_StartingPosition.position, m_Ball.m_StartingPosition.rotation) as GameObject;
         m_Ball.Setup(m_Camera, this, m_OutOfBoundsColliders);
         m_CameraControl.SetPlayer(m_Ball.m_Instance);
-    }
-
-    public void StartGame()
-    {
-        starting = true;
     }
 
     public void CountStrokes(uint strokes)

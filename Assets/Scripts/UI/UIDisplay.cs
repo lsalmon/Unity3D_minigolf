@@ -6,8 +6,7 @@ public class UIDisplay : MonoBehaviour
 {
     // Display text on screen
     public GameManager gameManager;
-    public GameObject mainMenu;
-    public GameObject pauseMenu;
+    private GameObject pauseMenu;
     private Text m_Text;
     private Coroutine boundsErr;
     private Coroutine strokeMsg;
@@ -16,13 +15,6 @@ public class UIDisplay : MonoBehaviour
     {
         // Find and assign menu objects,
         // which are children of the gameobject the script is attached to
-        mainMenu = transform.Find("MainMenu").gameObject;
-
-        if (mainMenu == null)
-        {
-            Debug.Log("Could not retrieve main menu object");
-        }
-
         pauseMenu = transform.Find("OptionMenu").gameObject;
 
         if (pauseMenu == null)
@@ -32,9 +24,6 @@ public class UIDisplay : MonoBehaviour
 
         // Disable the pause menu 
         pauseMenu.SetActive(false);
-
-        // Enable the main menu
-        mainMenu.SetActive(true);
 
         // Init of information display canvas
         // (directly linked to the gameobject the script is attached to)
@@ -49,9 +38,9 @@ public class UIDisplay : MonoBehaviour
         // Change font size
         m_Text.fontSize = 50;
         textTransform.sizeDelta = new Vector2(m_Text.fontSize * 15, 100f);
- 
-        // TODO: Find out why the main menu is not clickable at init
-        StartGame();
+
+        // Display starting text (information display canvas)
+        m_Text.text = "Press any key to start";
     }
 
     // Text display functions
@@ -62,18 +51,6 @@ public class UIDisplay : MonoBehaviour
         m_Text.text = "";
 
         strokeMsg = null;
-    }
-
-    public void StartGame()
-    {
-        // Disable the main menu
-        mainMenu.SetActive(false);
-
-        // Display starting text (information display canvas)
-        m_Text.text = "Press any key to start";
-
-        // Tell the manager to start the game
-        gameManager.StartGame();
     }
 
     public void DisplayStrokes(uint strokes)
