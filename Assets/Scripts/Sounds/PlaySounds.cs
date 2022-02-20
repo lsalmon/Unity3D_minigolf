@@ -5,7 +5,7 @@ using System.Collections;
 public class PlaySounds : MonoBehaviour
 {
     public AudioClip m_Collision;
-    public AudioClip m_Loading_Slider;
+    public AudioClip m_LoadingSlider;
     public AudioMixerGroup[] m_AudioMixers;
     private AudioSource collisionSource;
     private AudioSource loadingSource;
@@ -17,7 +17,7 @@ public class PlaySounds : MonoBehaviour
         collisionSource.volume = 1.0f;
         collisionSource.outputAudioMixerGroup = m_AudioMixers[0];
         loadingSource = gameObject.AddComponent<AudioSource>();
-        loadingSource.clip = m_Loading_Slider; 
+        loadingSource.clip = m_LoadingSlider;
         loadingSource.loop = true;
         loadingSource.volume = 1.0f;
         loadingSource.outputAudioMixerGroup = m_AudioMixers[1];

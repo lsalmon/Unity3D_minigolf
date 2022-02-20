@@ -10,7 +10,7 @@ public class BallMovement : MonoBehaviour
     private Camera m_Camera;
     private GameObject m_Hole;
     private Collider[] m_Colliders;
-    private BallManager m_Manager;
+    private GameManager m_Manager;
     private Rigidbody m_Rigidbody;
     private PlaySounds m_PlaySounds;
     private float m_ChargeTime = 2.0f;
@@ -55,7 +55,7 @@ public class BallMovement : MonoBehaviour
         m_Colliders = colliders;
     }
 
-    public void SetManager(BallManager manager)
+    public void SetManager(GameManager manager)
     {
         m_Manager = manager;
     }
@@ -167,7 +167,7 @@ public class BallMovement : MonoBehaviour
     {  
         if (GameObject.ReferenceEquals(trigger.gameObject, m_Hole))
         {
-            // Send message to BallManager to display score and end the game
+            // Send message to GameManager to display score and end the game
             m_Manager.End(strokes);
         }
     }

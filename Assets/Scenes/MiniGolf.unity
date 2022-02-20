@@ -1240,21 +1240,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add81c4a0c6396007ab799bd85ee4c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BallPrefab: {fileID: 8427137714743266930, guid: f423f28ac82109dca8787fcd1ca2641f, type: 3}
   m_Camera: {fileID: 963194227}
-  m_Ball:
-    m_StartingPosition: {fileID: 25339987}
-    m_Hole: {fileID: 564884208}
-    m_ChargeTime: 2
-    m_Force: 20
-    m_Instance: {fileID: 0}
+  m_CamOffset: {x: 5, y: 3, z: 0}
+  m_BallPrefab: {fileID: 8427137714743266930, guid: f423f28ac82109dca8787fcd1ca2641f, type: 3}
   m_OutOfBoundsColliders:
   - {fileID: 1824042334}
   - {fileID: 1760239907}
+  m_StartingPosition: {fileID: 25339987}
+  m_Hole: {fileID: 564884208}
+  m_ChargeTime: 2
+  m_Force: 10
   m_Display: {fileID: 1098696742}
-  m_CamOffset: {x: 5, y: 3, z: 0}
-  background: {fileID: 8300000, guid: 82f1abdce7be4c277b3c27a0be750fe7, type: 3}
-  completed: {fileID: 8300000, guid: 9c66793cd7b14831cb7be06930dbef8a, type: 3}
+  m_AudioBackground: {fileID: 8300000, guid: 82f1abdce7be4c277b3c27a0be750fe7, type: 3}
+  m_AudioCompleted: {fileID: 8300000, guid: 9c66793cd7b14831cb7be06930dbef8a, type: 3}
 --- !u!82 &1477424911
 AudioSource:
   m_ObjectHideFlags: 0
