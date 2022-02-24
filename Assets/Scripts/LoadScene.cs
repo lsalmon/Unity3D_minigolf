@@ -7,6 +7,6 @@ public class LoadScene : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("MiniGolf");
+        SceneManager.LoadScene("Hole1");
     }
 }

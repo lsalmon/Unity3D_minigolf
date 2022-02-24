@@ -1243,9 +1243,7 @@ MonoBehaviour:
   m_Camera: {fileID: 963194227}
   m_CamOffset: {x: 5, y: 3, z: 0}
   m_BallPrefab: {fileID: 8427137714743266930, guid: f423f28ac82109dca8787fcd1ca2641f, type: 3}
-  m_OutOfBoundsColliders:
-  - {fileID: 1824042334}
-  - {fileID: 1760239907}
+  m_OutOfBoundsCollider: {fileID: 0}
   m_StartingPosition: {fileID: 25339987}
   m_Hole: {fileID: 564884208}
   m_ChargeTime: 2
@@ -1767,6 +1765,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -4444375605131080722, guid: 02226bba50d4e49cb93634fba07ebed3, type: 3}
   m_PrefabInstance: {fileID: 1556962582}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2071625262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071625261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667fbf5d7eab4f415b700bd30141ff0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &2071625263
 MeshCollider:
   m_ObjectHideFlags: 0

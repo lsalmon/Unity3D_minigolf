@@ -12,9 +12,8 @@ public class GameManager : MonoBehaviour
 
     // Ball variables
     public GameObject m_BallPrefab;
-    // Colliders to detect when the ball goes out of the course
-    // (ground collider must be first in array)
-    public Collider[] m_OutOfBoundsColliders;
+    // Collider to detect when the ball goes out of the course
+    public Collider m_OutOfBoundsCollider;
     // Starting position for the ball
     public Transform m_StartingPosition;
     // Used to detect when the ball is in the hole
@@ -125,7 +124,7 @@ public class GameManager : MonoBehaviour
         ballMovement.SetCamera(m_Camera);
         ballMovement.SetPower(m_ChargeTime, m_Force);
         ballMovement.SetHole(m_Hole);
-        ballMovement.SetColliders(m_OutOfBoundsColliders);
+        ballMovement.SetCollider(m_OutOfBoundsCollider);
         ballMovement.SetManager(this);
  
         // Set slider
