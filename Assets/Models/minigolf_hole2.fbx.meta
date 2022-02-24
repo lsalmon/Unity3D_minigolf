@@ -30,7 +30,47 @@ ModelImporter:
   - first:
       74: 4615557709261338622
     second: BarriersLeft|BladesAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borders
+    second: {fileID: 2100000, guid: b8de10fd9c6bf67019c5246c6443684f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flag
+    second: {fileID: 2100000, guid: 8e2fb342851d89e5e8aa8ea819b990f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 0992dd23701475e8c9486ccb17d3f47f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: fb3d069df21954b72a4af397f507a949, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SiloBottom
+    second: {fileID: 2100000, guid: 0e143e0d5a98b5f1387ab4a9ca3b00d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SiloTop
+    second: {fileID: 2100000, guid: 07d74f5f7494d9132bbd60dcbb5e66a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stripes
+    second: {fileID: 2100000, guid: 688283ddcfd71fe308ddb91417e66fef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: cf7c39ca7d9cddc55b81988c245736b0, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
