@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -151,6 +152,12 @@ public class GameManager : MonoBehaviour
         ballMovement.EnableMovement(status);
     }
 
+    private IEnumerator LoadNextScene(uint scene)
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Hole"+scene);
+    }
+
     // Stop the game if ball is in hole
     public void End(uint strokes)
     {
@@ -166,6 +173,12 @@ public class GameManager : MonoBehaviour
         // Display ending message
         uiDisplay.DisplayEnd(strokes);
         Debug.Log("End of game, strokes "+strokes);
+
+        // If hole 1 has been completed, switch to hole 2
+        if (SceneManager.GetActiveScene().name == "Hole1")
+        {
+            StartCoroutine(LoadNextScene(2));
+        }
     }
 
     // If we resume from the menu instead of pressing the menu key
