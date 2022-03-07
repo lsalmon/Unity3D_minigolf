@@ -24,7 +24,7 @@ Shader "Unlit/Cell"
             float3 getNormal (float3 normal, float3 lightDirection)
             {
                 float NdotL = dot(normalize(lightDirection), normalize(normal));
-                return NdotL;
+                return max(0.0, NdotL);
             }
 
             struct appdata
@@ -60,7 +60,7 @@ Shader "Unlit/Cell"
 
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return col;
+                return col *= NdotL;
             }
             ENDCG
         }
