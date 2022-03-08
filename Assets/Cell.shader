@@ -20,6 +20,7 @@ Shader "Unlit/Cell"
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "UnityLightingCommon.cginc"
 
             float3 getNormal (float3 normal, float3 lightDirection)
             {
@@ -56,11 +57,19 @@ Shader "Unlit/Cell"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                // separation band between light part and shadow part
                 float NdotL = getNormal(i.worldNormal, _WorldSpaceLightPos0);
+                NdotL = smoothstep(0, 0.01, NdotL);
+
+                // use color of directional light to shade
+                float4 light = (NdotL * _LightColor0);
+
+                // attenuation so the shadow side isnt entierely black
+                float attenuation = 0.3;
 
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return col *= NdotL;
+                return col *= (light + attenuation);
             }
             ENDCG
         }
